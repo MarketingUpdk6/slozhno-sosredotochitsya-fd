@@ -1,5 +1,319 @@
-/* Основные стили проекта. Это стили для темы, которую вы верстаете первой. */
-
 .page {
-  /* сохраните в разметке и стилях класс page у тега body. Он удобен, чтобы составлять селекторы для разных цветовых тем. */
+  background-color: var(--bg-color);
+  background-image: var(--bg-image);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.decorated-zone::before,
+.decorated-zone::after {
+  content: "";
+  position: absolute;
+  inline-size: 25px;
+  block-size: 25px;
+}
+
+.decorated-zone::before {
+  inset-inline-end: var(--main-gap);
+  inset-block-start: var(--main-gap);
+  border-inline-end: 1px solid var(--header-color);
+  border-block-start: 1px solid var(--header-color);
+}
+
+.decorated-zone::after {
+  inset-inline-start: var(--main-gap);
+  inset-block-end: var(--main-gap);
+  border-inline-start: 1px solid var(--header-color);
+  border-block-end: 1px solid var(--header-color);
+}
+
+.header__rec {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  gap: 10px;
+  inset-inline-end: var(--main-gap);
+  inset-block-start: var(--main-gap);
+}
+
+.header__rec::before {
+  content: "REC";
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 25px;
+  color: var(--header-color);
+}
+
+.header__rec::after {
+  content: "";
+  display: inline-block;
+  margin-inline-end: 9px;
+  inline-size: 9px;
+  block-size: 9px;
+  background-color: var(--header-color);
+  border-radius: 50%;
+  box-shadow: 0 0 4px 2px var(--header-color);
+}
+
+.header {
+  display: grid;
+  block-size: 100vh;
+  min-block-size: 668px;
+  position: relative;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr min-content 1fr;
+  align-items: center;
+  color: var(--header-color);
+
+  @media (width >= 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.header__theme-menu {
+  justify-self: end;
+  margin-block-start: var(--main-gap);
+  margin-inline-end: var(--main-gap);
+
+  @media (width >= 768px) {
+    grid-column: 2;
+  }
+
+  @media (width >= 1024px) {
+    grid-column: 1/-1;
+    justify-self: center;
+    align-self: self-start;
+    margin-inline-start: var(--main-gap);
+  }
+}
+.header__theme-menu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  @media (width >= 1024px) {
+    flex-direction: row;
+  }
+}
+
+.header__theme-menu-button {
+  min-inline-size: 70px;
+  min-block-size: 26px;
+  background-color: transparent;
+  border: none;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 18px;
+  text-transform: lowercase;
+  cursor: pointer;
+  appearance: none;
+}
+
+.header__theme-menu-button_active {
+  outline: 1px solid var(--header-color);
+  pointer-events: none;
+}
+
+.header__theme-menu-button:focus {
+  outline: none;
+}
+
+.header__theme-menu-button:focus-visible {
+  border-bottom: 1px solid var(--header-color);
+}
+
+.header__theme-menu-button:hover {
+  outline: 1px solid var(--button-hover-color);
+}
+
+.logo {
+  font-weight: 700;
+  font-size: var(--title-font-size);
+  line-height: 83%;
+  color: var(--title-color);
+}
+
+.header__title {
+  margin-inline-start: var(--main-gap);
+  text-shadow: 4px 4px 0 var(--accent-color);
+
+  @media (width >= 768px) {
+    margin-inline-start: 0px;
+    grid-column: 1 / -1;
+  }
+}
+
+.header__subtitle {
+  margin-inline: var(--main-gap);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 23.4px;
+  margin-block-end: var(--main-gap);
+
+  @media (width >= 768px) {
+    grid-column: 2;
+    margin-inline-start: 0;
+  }
+}
+
+.title-decor {
+  background-color: var(--accent-color);
+  color: var(--main-text-color);
+}
+
+.content {
+  margin-block: var(--content-margin-block);
+  padding-inline: clamp(var(--main-gap), 2.6%, 20px);
+  display: grid;
+  gap: var(--content-gap);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 23.4px;
+}
+
+.content-section {
+  display: grid;
+  gap: 20px;
+
+  @media (width >= 768px) {
+    grid-template-columns: 1fr 2fr;
+  }
+
+  @media (width >= 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.content-section__title {
+  color: var(--header-color);
+  font-weight: 700;
+  font-size: inherit;
+}
+
+.content-blocks {
+  display: grid;
+  gap: 20px;
+
+  @media (width >= 1024px) {
+    grid-column: span 2;
+  }
+}
+
+.causes .content-blocks {
+  @media (width >= 768px) {
+    grid-column: 1 / -1;
+  }
+
+  @media (width >= 1024px) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}
+
+.text-block {
+  display: grid;
+  grid-template-rows: min-content 1fr;
+  gap: 10px;
+}
+
+.text-block__title {
+  color: var(--main-text-color);
+  background-color: var(--accent-color);
+  font-weight: 700;
+  font-size: inherit;
+}
+
+.text-block__text {
+  color: var(--text-color);
+}
+
+.text__link {
+  text-decoration: none;
+  text-shadow: 2px 2px 0 var(--accent-color);
+}
+
+.text__link:hover {
+  border-bottom: 2px solid var(--text-color);
+}
+
+.text__link:focus {
+  outline: none;
+}
+
+.text__link:focus-visible {
+  outline: 1px solid var(--text-color);
+}
+
+.subtitle {
+  font-weight: inherit;
+}
+
+.advices .text-block__text:not(:last-of-type) {
+  margin-block-end: 10px;
+}
+
+.gallery {
+  display: grid;
+  gap: var(--main-gap);
+
+  @media (width >= 768px) {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, min-content);
+  }
+}
+
+.image-block__title {
+  color: var(--main-text-color);
+  background-color: var(--accent-color);
+  font-weight: 700;
+  font-size: inherit;
+
+  @media (width >= 768px) {
+    grid-column: 1/-1;
+  }
+}
+
+.image {
+  display: block;
+  inline-size: 100%;
+
+  @media (width >= 768px) {
+    block-size: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+@media (width >= 768px) {
+  .image:first-of-type {
+    grid-column: span 2;
+  }
+
+  .image:nth-of-type(2) {
+    grid-row: span 2;
+  }
+
+  .image:nth-of-type(3) {
+    grid-row: span 2;
+  }
+
+  .image:nth-of-type(5) {
+    grid-column: span 2;
+  }
+}
+
+.footer {
+  display: grid;
+  block-size: 100vh;
+  min-block-size: 668px;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer__title {
+  text-shadow: 2px 2px 0 #ff0070;
 }
